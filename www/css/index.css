@@ -1,14 +1,17 @@
-.beautiful {
-    margin-top: 1em;
-    margin-left: 1em;
+/** GENERAL **/
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 1rem;
 }
 
-form input {
-    display: block;
-    margin: 15px 0;
+.frame {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
 }
 
-.meine-form {
-    width: 50% !important;
-    margin-left: 1em;
+/** NAVBAR **/
+
+#navbarNav {
+    justify-content: flex-end;
 }
