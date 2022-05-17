@@ -12,12 +12,12 @@
             <h2 class="text-center">Login</h2>
             <form action="" method="post">
                 <div class="mb-3">
-                    <label for="benutzername" class="form-label">Benutzername</label>
-                    <input type="text" class="form-control" id="benutzername">
+                    <label for="username" class="form-label">Benutzername</label>
+                    <input type="text" class="form-control" id="username">
                 </div>
                 <div class="mb-3">
-                    <label for="passwort" class="form-label">Passwort</label>
-                    <input type="password" class="form-control" id="passwort">
+                    <label for="password" class="form-label">Passwort</label>
+                    <input type="password" class="form-control" id="password">
                 </div>
                 <button type="submit" class="btn btn-primary">Login</button>
             </form>

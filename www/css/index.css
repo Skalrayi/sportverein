@@ -38,3 +38,8 @@ body {
     margin: auto;
     padding: 2rem;
 }
+
+.login-form-wrapper button {
+    display: block;
+    margin: auto;
+}
