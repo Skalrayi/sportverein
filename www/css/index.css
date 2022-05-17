@@ -1,0 +1,14 @@
+.beautiful {
+    margin-top: 1em;
+    margin-left: 1em;
+}
+
+form input {
+    display: block;
+    margin: 15px 0;
+}
+
+.meine-form {
+    width: 50% !important;
+    margin-left: 1em;
+}
