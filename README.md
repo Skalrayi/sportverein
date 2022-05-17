@@ -5,6 +5,6 @@ Nur für Windows: WSL installieren: Dazu entweder in der Powershell oder Konsole
 
 Docker installieren [(Download)](https://www.docker.com/products/docker-desktop/)
 
-In das gewünschte Verzeichnis navigieren und `git clone https://github.com/Skalrayi/sportverein.git` ausführen
+In das gewünschte Verzeichnis navigieren und auf der Konsole im Verzeichnis `git clone https://github.com/Skalrayi/sportverein.git` ausführen
 
-In den Projektordner navigieren und `docker-compose up -d` ausführen
+In den Projektordner navigieren und auf der Konsole `docker-compose up -d` ausführen
