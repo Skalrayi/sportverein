@@ -1,5 +1,21 @@
 <?php
+
+include __DIR__ . "/../Database.php";
     session_start();
+    var_dump($_SESSION);
+    function fetchMembers()
+    {
+        $mitglieder = Database::getInstance()->query('SELECT * FROM mitglied')->fetchAll();
+        return $mitglieder;
+    }
+    function fetchMember(int $id)
+    {
+        $stmt = Database::getInstance()->prepare("SELECT * FROM mitglied WHERE mi_id = :id");
+        $member = $stmt->bindParam(':id', $id);
+
+        return $member;
+    }
+
 ?>
 <html>
 <head>
