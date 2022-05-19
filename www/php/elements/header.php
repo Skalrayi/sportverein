@@ -1,5 +1,8 @@
 <?php
     session_start();
+    if (!isset($_SESSION['username']) && $_SERVER['PHP_SELF'] != '/index.php') {
+        header('Location: ../../../index.php');
+    }
 ?>
 <html>
 <head>
