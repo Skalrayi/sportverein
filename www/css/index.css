@@ -42,6 +42,11 @@ hr {
     color: white;
 }
 
+button {
+    border: none;
+    background-color: transparent;
+}
+
 
 /** NAVBAR **/
 
@@ -106,14 +111,54 @@ form.search input {
     height: 100%;
 }
 
-.list-row {
-    padding: 1rem 0;
-    border: solid 1px var(--grey);
-}
-
 .list-head {
     background-color: var(--grey);
+    font-weight: bold;
 }
+
+.list-row {
+    border: solid 1px var(--grey);
+    align-items: center;
+}
+
+.list-row .col {
+    padding: 1rem;
+}
+
+.list-row .edit {
+    border-left: solid 1px var(--grey);
+}
+
+button.edit-button i,
+button.delete-button i {
+    font-size: 1.5rem;
+}
+
+button.delete-button i {
+    color: var(--red);
+}
+
+/** MODAL PART **/
+
+.modal-header {
+    padding-left: 0;
+    padding-right: 0;
+    border: none;
+    align-items: flex-start;
+}
+
+.modal-dialog {
+    max-width: 768px;
+}
+
+.modal-content {
+    padding: 2rem;
+}
+
+.submit-edit {
+    border-radius: 5px;
+}
+
 
 /*
 .list-row:not(.list-head):nth-child(odd) {

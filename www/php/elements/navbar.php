@@ -9,7 +9,7 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Logout</a>
+                    <a class="nav-link" href="#">Max Mustermann <i class="fa fa-sign-in" aria-hidden="true"></i></a>
                 </li>
             </ul>
         </div>
