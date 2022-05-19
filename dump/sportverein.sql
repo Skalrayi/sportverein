@@ -433,12 +433,18 @@ INSERT INTO `trainer` (`ma_id`, `mi_id`) VALUES
 (4, 1),
 (4, 12);
 
+--
+-- Tabellenstruktur für Tabelle `login`
+--
 CREATE TABLE `login` (
     `lo_id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
     `username` VARCHAR(50) NOT NULL UNIQUE,
     `password` VARCHAR(255) NOT NULL
 );
 
+--
+-- Daten für Tabelle `login`
+--
 INSERT INTO `login` (`username`, `password`) VALUES
 ('admin', '$2y$10$KA2I6OMgF81rQdhsmHTRoOdYKRDEHgHvysJ9aYIGohKAZGJgNX752');
 
