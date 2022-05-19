@@ -108,14 +108,14 @@ include __DIR__ . "/../elements/navbar.php";
             <div class="results">
                 <p>Ergebnisse pro Seite</p>
                 <form action="" method="post">
-                    <input type="number" class="form-control" placeholder="z.B. 20">
+                    <input type="number" class="form-control" placeholder="z.B. 20" min="1">
                 </form>
                 <p class="color-grey"> 1 - 20 von 120</p>
             </div>
             <div class="page">
                 <p>Aktuelle Seite</p>
                 <form action="" method="post">
-                    <input type="number" class="form-control" placeholder="z.B. 20">
+                    <input type="number" class="form-control" placeholder="z.B. 20" min="1">
                 </form>
                 <div class="arrows">
                     <a href="#"><i class="fa fa-long-arrow-left" aria-hidden="true"></i></a>
