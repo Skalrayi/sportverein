@@ -6,10 +6,30 @@
     --lightgrey: #bfbfbf;
 }
 
+.color-red {
+    color: var(--red)
+}
+.color-dark-red {
+    color: var(--dark-red)
+}
+.color-grey {
+    color: var(--grey)
+}
+.color-lightgrey {
+    color: var(--lightgrey)
+}
+
 body {
     font-family: 'Open Sans', sans-serif;
     font-size: 1rem;
     line-height: 1;
+}
+
+a {
+    color: inherit;
+}
+a:hover {
+    color: inherit;
 }
 
 p {
@@ -33,7 +53,7 @@ hr {
     background-color: var(--red);
     color: white;
     text-transform: uppercase;
-    border-radius: 0;
+    border-radius: 5px;
 }
 .btn-default:hover,
 .btn-default:focus,
@@ -58,10 +78,15 @@ button {
     justify-content: flex-end;
 }
 
+.nav-link {
+    color: black;
+}
+
 /** FOOTER **/
 
 footer {
     padding-top: 1rem;
+    margin-top: 3rem;
     padding-bottom: 1rem;
     background-color: var(--red);
 }
@@ -109,6 +134,8 @@ form.search {
 
 form.search input {
     height: 100%;
+    border-radius: 5px;
+    border: 1px solid var(--grey);
 }
 
 .list-head {
@@ -123,6 +150,19 @@ form.search input {
 
 .list-row .col {
     padding: 1rem;
+    flex-basis: 50%
+}
+.list-row .col.edit {
+    flex-basis: 100%;
+    justify-content: space-around;
+    display: flex;
+}
+
+@media (min-width: 768px) {
+    .list-row .col,
+    .list-row .col.edit {
+        flex-basis: content;
+    }
 }
 
 .list-row .edit {
@@ -138,7 +178,31 @@ button.delete-button i {
     color: var(--red);
 }
 
-/** MODAL PART **/
+.list-pagination {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 0;
+}
+
+.list-pagination form {
+    margin-bottom: 0;
+    max-width: 100px;
+}
+
+.list-pagination .results,
+.list-pagination .page {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    width: auto;
+}
+
+.list-pagination .arrows {
+    display: flex;
+    gap: 1rem;
+}
+
+/** MODALs **/
 
 .modal-header {
     padding-left: 0;
@@ -153,6 +217,11 @@ button.delete-button i {
 
 .modal-content {
     padding: 2rem;
+}
+
+.modal-content input,
+.modal-content select {
+    margin-bottom: 1rem;
 }
 
 .submit-edit {
