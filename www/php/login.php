@@ -34,6 +34,5 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
     session_abort();
 }
 
-var_dump($_SESSION);
 
 

@@ -3,7 +3,6 @@
     if (!isset($_SESSION['username']) && $_SERVER['PHP_SELF'] != '/index.php') {
         header('Location: ../../../index.php');
     }
-    var_dump($_SESSION);
     function fetchMembers()
     {
         $mitglieder = Database::getInstance()->query('SELECT * FROM mitglied')->fetchAll();

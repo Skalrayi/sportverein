@@ -21,7 +21,7 @@
                         <button type="submit" class="btn btn-default d-block w-100">Login</button>
                     </form>
                     <?php if (isset($_GET['login'])): ?>
-                        <p>ERROR</p>
+                        <p class="color-red">Die Eingabe war nicht korrekt</p>
                     <?php endif; ?>
                 </div>
             </div>
