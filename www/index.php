@@ -2,7 +2,6 @@
     include "php/elements/header.php";
 ?>
 
-
 <div class="container-fluid">
     <div class="row">
         <div class="col-12 col-md-6">
@@ -10,17 +9,20 @@
                 <div class="login-form-wrapper">
                     <h1>Sportverein</h1>
                     <hr>
-                    <form action="" method="post">
+                    <form action="./php/login.php" method="POST">
                         <div class="mb-3">
                             <label for="username" class="form-label">Benutzername</label>
-                            <input type="text" class="form-control" id="username">
+                            <input type="text" class="form-control" id="username" name="username">
                         </div>
                         <div class="mb-3">
                             <label for="password" class="form-label">Passwort</label>
-                            <input type="password" class="form-control" id="password">
+                            <input type="password" class="form-control" id="password" name="password">
                         </div>
                         <button type="submit" class="btn btn-default d-block w-100">Login</button>
                     </form>
+                    <?php if (isset($_GET['login'])): ?>
+                        <p>ERROR</p>
+                    <?php endif; ?>
                 </div>
             </div>
         </div>

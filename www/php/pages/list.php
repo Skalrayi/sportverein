@@ -1,7 +1,6 @@
 <?php
 include __DIR__ . "/../elements/header.php";
 include __DIR__ . "/../elements/navbar.php";
-
 ?>
 
 <div class="container body-list">
