@@ -9,7 +9,7 @@
                 <div class="login-form-wrapper">
                     <h1>Sportverein</h1>
                     <hr>
-                    <form action="./php/login.php" method="POST">
+                    <form action="php/actions/login.php" method="POST">
                         <div class="mb-3">
                             <label for="username" class="form-label">Benutzername</label>
                             <input type="text" class="form-control" id="username" name="username">

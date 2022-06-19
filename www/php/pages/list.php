@@ -1,6 +1,7 @@
 <?php
 include __DIR__ . "/../elements/header.php";
 include __DIR__ . "/../elements/navbar.php";
+include __DIR__ . "/../MemberRepository.php";
 ?>
 
 <div class="container body-list">
@@ -11,6 +12,9 @@ include __DIR__ . "/../elements/navbar.php";
 
     <div class="action-bar mb-5">
         <button type="button" class="btn btn-default" data-bs-toggle="modal" data-bs-target="#addmember">+ Mitglied hinzufügen</button>
+        <?php if (isset($_GET['missingParameters'])) : //TODO html anpassen ?>
+            <p class="color-red">Fehlerhafte Eingaben!</p>
+        <?php endif; ?>
         <form class="search" action="list.php" method="post">
             <input type="text" placeholder="Suche" name="search">
         </form>
@@ -28,100 +32,53 @@ include __DIR__ . "/../elements/navbar.php";
             <div class="col money">Grundbeitrag</div>
             <div class="col edit">Bearbeiten</div>
         </div>
-        <div class="row list-row">
-            <div class="col id">#</div>
-            <div class="col surname">Nachname</div>
-            <div class="col forename">Vorname</div>
-            <div class="col zip">PLZ</div>
-            <div class="col city">Ort</div>
-            <div class="col male">Geschlecht</div>
-            <div class="col sport">Sportart</div>
-            <div class="col money">Grundbeitrag</div>
-            <div class="col edit">
-                <button type="button" class="edit-button" data-bs-toggle="modal" data-bs-target="#editmember">
-                    <i class="fa fa-pencil" aria-hidden="true"></i>
-                </button>
-                <button type="button" class="delete-button" data-bs-toggle="modal" data-bs-target="#deletemember">
-                    <i class="fa fa-trash" aria-hidden="true"></i>
-                </button>
+        <?php
+            $memberRepository = new MemberRepository();
 
-            </div>
-        </div>
-        <div class="row list-row">
-            <div class="col id">#</div>
-            <div class="col surname">Nachname</div>
-            <div class="col forename">Vorname</div>
-            <div class="col zip">PLZ</div>
-            <div class="col city">Ort</div>
-            <div class="col male">Geschlecht</div>
-            <div class="col sport">Sportart</div>
-            <div class="col money">Grundbeitrag</div>
-            <div class="col edit">
-                <button type="button" class="edit-button" data-bs-toggle="modal" data-bs-target="#editmember">
-                    <i class="fa fa-pencil" aria-hidden="true"></i>
-                </button>
-                <button type="button" class="delete-button" data-bs-toggle="modal" data-bs-target="#deletemember">
-                    <i class="fa fa-trash" aria-hidden="true"></i>
-                </button>
+            $page = $_GET['page'] ?? null;
 
+            $userData = $memberRepository->getAllMembersWithGrundbeitrag(null, $page);
+        ?>
+        <?php foreach ($userData as $user) : ?>
+            <div class="row list-row">
+                <div class="col id"><?= $user['mi_id'] ?></div>
+                <div class="col surname"><?= $user['nachname'] ?></div>
+                <div class="col forename"><?= $user['vorname'] ?></div>
+                <div class="col zip"><?= $user['plz'] ?></div>
+                <div class="col city"><?= $user['ort'] ?></div>
+                <div class="col male"><?= $user['geschlecht'] ?></div>
+                <div class="col sport"><?= $user['or_id'] ?></div>
+                <div class="col money"><?= $user['beitrag'] ?></div>
+                <div class="col edit">
+                    <button type="button" class="edit-button" data-bs-toggle="modal" data-bs-target="#editmember">
+                        <i class="fa fa-pencil" aria-hidden="true"></i>
+                    </button>
+                    <button type="button" class="delete-button" data-bs-toggle="modal" data-bs-target="#deletemember">
+                        <i class="fa fa-trash" aria-hidden="true"></i>
+                    </button>
+                </div>
             </div>
-        </div>
-        <div class="row list-row">
-            <div class="col id">#</div>
-            <div class="col surname">Nachname</div>
-            <div class="col forename">Vorname</div>
-            <div class="col zip">PLZ</div>
-            <div class="col city">Ort</div>
-            <div class="col male">Geschlecht</div>
-            <div class="col sport">Sportart</div>
-            <div class="col money">Grundbeitrag</div>
-            <div class="col edit">
-                <button type="button" class="edit-button" data-bs-toggle="modal" data-bs-target="#editmember">
-                    <i class="fa fa-pencil" aria-hidden="true"></i>
-                </button>
-                <button type="button" class="delete-button" data-bs-toggle="modal" data-bs-target="#deletemember">
-                    <i class="fa fa-trash" aria-hidden="true"></i>
-                </button>
+        <?php endforeach; ?>
 
-            </div>
-        </div>
-        <div class="row list-row">
-            <div class="col id">#</div>
-            <div class="col surname">Nachname</div>
-            <div class="col forename">Vorname</div>
-            <div class="col zip">PLZ</div>
-            <div class="col city">Ort</div>
-            <div class="col male">Geschlecht</div>
-            <div class="col sport">Sportart</div>
-            <div class="col money">Grundbeitrag</div>
-            <div class="col edit">
-                <button type="button" class="edit-button" data-bs-toggle="modal" data-bs-target="#editmember">
-                    <i class="fa fa-pencil" aria-hidden="true"></i>
-                </button>
-                <button type="button" class="delete-button" data-bs-toggle="modal" data-bs-target="#deletemember">
-                    <i class="fa fa-trash" aria-hidden="true"></i>
-                </button>
-
-            </div>
-        </div>
         <div class="row list-row list-pagination">
             <div class="results">
                 <p>Ergebnisse pro Seite</p>
-                <form action="" method="post">
-                    <input type="number" class="form-control" placeholder="z.B. 20" min="1">
+                <form action="" method="get">
+                    <input type="number" class="form-control" name="amount" placeholder="z.B. 20" min="1">
                 </form>
                 <p class="color-grey"> 1 - 20 von 120</p>
             </div>
             <div class="page">
                 <p>Aktuelle Seite</p>
-                <form action="" method="post">
-                    <input type="number" class="form-control" placeholder="z.B. 20" min="1">
+                <form action="" method="get">
+                    <input type="number" class="form-control" placeholder="z.B. 20" min="1" value="<?= isset($_GET['page']) ? $_GET[$page] : '' ?>">
                 </form>
                 <div class="arrows">
-                    <a href="#"><i class="fa fa-long-arrow-left" aria-hidden="true"></i></a>
-                    <a href="#"><i class="fa fa-arrow-left" aria-hidden="true"></i></a>
-                    <a href="#"><i class="fa fa-arrow-right" aria-hidden="true"></i></a>
-                    <a href="#"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
+                    <a href="./list.php?page=1"><i class="fa fa-long-arrow-left" aria-hidden="true"></i></a>
+                    <a href="<?= isset($_GET['page']) ? ($_GET['page'] == 1 ? './list.php?page=1' : './list.php?page=' . $_GET['page'] - 1) : './list.php?page=1' ?>"><i class="fa fa-arrow-left" aria-hidden="true"></i></a>
+                    <a href="<?= isset($_GET['page']) ? './list.php?page=' . $_GET['page'] + 1 : './list.php?page=2' ?>"><i class="fa fa-arrow-right" aria-hidden="true"></i></a>
+                    <?php //TODO amountPerPage muss gemacht werden!!!?>
+                    <a href="<?= './list.php?page=' . Utility::calculateLastPage($memberRepository->getCountOfAllMembers(), 15) ?>"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
                 </div>
             </div>
         </div>

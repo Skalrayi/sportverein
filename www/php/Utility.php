@@ -6,10 +6,17 @@ class Utility {
         exit();
     }
 
-    static function checkLoggedIn(): bool {
-        if (isset($_SESSION['username'])) {
-            return true;
+    static function redirectIfNotLoggedIn() {
+        if (!isset($_SESSION['username']) && $_SERVER['PHP_SELF'] != '/index.php') {
+            header('Location: ../../../index.php');
         }
-        return false;
+    }
+
+    static function checkIfLoggedIn(): bool {
+        return isset($_SESSION['username']);
+    }
+
+    static function calculateLastPage(int $amountOfDbResults, int $amountPerPage): int {
+        return ceil($amountOfDbResults / $amountPerPage);
     }
 }

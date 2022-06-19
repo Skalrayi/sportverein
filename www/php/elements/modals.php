@@ -11,7 +11,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="" method="post">
+            <form action="../actions/insert.php" method="post">
                 <div class="row mb-3">
                     <div class="col-12 col-md-6">
                         <label for="forename" class="form-label">Vorname *</label>
@@ -35,16 +35,16 @@
                 <div class="row mb-3">
                     <div class="col-12 col-md-6">
                         <label for="male" class="form-label">Geschlecht *</label>
-                        <select class="form-select" id="male" name="male"  required>
-                            <option selected>Geschlecht</option>
-                            <option value="male">Männlich</option>
-                            <option value="female">Weiblich</option>
+                        <select class="form-select" id="gender" name="gender"  required>
+                            <option selected disabled value="">Geschlecht</option>
+                            <option value="m">Männlich</option>
+                            <option value="w">Weiblich</option>
                         </select>
                     </div>
                     <div class="col-12 col-md-6">
                         <label for="sport" class="form-label">Sportarten *</label>
                         <select type="text" class="form-select mb-4" id="sport" name="sport" required>
-                            <option selected>Geschlecht</option>
+                            <option selected disabled value="">Geschlecht</option>
                             <option value="male">Männlich</option>
                             <option value="female">Weiblich</option>
                         </select>
@@ -129,7 +129,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="" method="post">
+            <form action="./../actions/delete.php" method="post">
                 <button type="submit" class="btn btn-default submit-delete d-block w-100">Löschen</button>
             </form>
         </div>

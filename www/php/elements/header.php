@@ -1,20 +1,7 @@
 <?php
-    session_start();
-    if (!isset($_SESSION['username']) && $_SERVER['PHP_SELF'] != '/index.php') {
-        header('Location: ../../../index.php');
-    }
-    function fetchMembers()
-    {
-        $mitglieder = Database::getInstance()->query('SELECT * FROM mitglied')->fetchAll();
-        return $mitglieder;
-    }
-    function fetchMember(int $id)
-    {
-        $stmt = Database::getInstance()->prepare("SELECT * FROM mitglied WHERE mi_id = :id");
-        $member = $stmt->bindParam(':id', $id);
-
-        return $member;
-    }
+session_start();
+include __DIR__ . "/../Utility.php";
+Utility::redirectIfNotLoggedIn();
 
 ?>
 <html>
