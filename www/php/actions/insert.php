@@ -1,6 +1,6 @@
 <?php
 session_start();
-include __DIR__ . "/../Utility.php";
+require_once __DIR__ . "/../Utility.php";
 
 if (!Utility::checkIfLoggedIn()) {
     // Wenn man nicht angemeldet ist, soll das Skript sterben, falls man die URL so aufruft.
@@ -20,7 +20,7 @@ if (!$forename || !$surname || !$zip || !$city || !$gender) {
     Utility::redirect('./../pages/list.php?missingParameters=true');
 }
 
-$memberRepository = new MemberRepository();
+$memberRepository = new MemberModel();
 $memberRepository->insertNewUser([$forename, $surname, $zip, $city, $gender, 1, 1]);
 
 Utility::redirect('./../pages/list.php');

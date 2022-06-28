@@ -33,7 +33,7 @@ include __DIR__ . "/../MemberRepository.php";
             <div class="col edit">Bearbeiten</div>
         </div>
         <?php
-            $memberRepository = new MemberRepository();
+            $memberRepository = new MemberModel();
 
             $page = $_GET['page'] ?? null;
 

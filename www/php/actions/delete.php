@@ -11,7 +11,7 @@ include __DIR__ . "/../MemberRepository.php";
 
 $id = $_POST['id'];
 
-$memberRepository = new MemberRepository();
+$memberRepository = new MemberModel();
 $memberRepository->deleteMemberById($id);
 
 Utility::redirect('./../pages/list.php');

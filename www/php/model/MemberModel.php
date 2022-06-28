@@ -1,8 +1,9 @@
 <?php
-include __DIR__ . '/Database.php';
+require_once __DIR__ . '/../Database.php';
 
-class MemberRepository extends Database
+class MemberModel extends Database
 {
+    private const REQUIRED_FIELDS = ['forename', 'surname', 'zip', 'city', 'gender', 'sport'];
     private const DEFAULT_AMOUNT_PER_PAGE = 15;
 
     public function findById(int $id) {
@@ -19,10 +20,24 @@ class MemberRepository extends Database
         $this->run($stmt);
     }
 
-    public function insertNewUser(array $data) {
+    /**
+     * Fügt einen neuen User in die Datenbank ein
+     *
+     * @param array $data
+     * @return bool gibt wahr zurück, wenn ein User eingefügt wurde, ansonsten false
+     */
+    public function insertNewUser(array $data): bool {
+        // Wenn bei den übergebenen Daten nicht alle benötigten Felder dabei sind, dann wird nichts inserted und false returned
+        foreach (self::REQUIRED_FIELDS as $field) {
+            if (!array_key_exists($field)) {
+                return false;
+            }
+        }
+
         $stmt = 'INSERT INTO mitglied (vorname, nachname, plz, ort, geschlecht, or_id, gb_id)
                  VALUES (?, ?, ?, ?, ?, ?, ?)';
-        $this->run($stmt, $data);
+        $stmt = $this->run($stmt, $data);
+        $stmt->rrrsdreturn true;
     }
 
     public function getAllMembers(): array {

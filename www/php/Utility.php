@@ -1,6 +1,5 @@
 <?php
 class Utility {
-
     static function redirect($location) {
         header('Location: ' . $location);
         exit();

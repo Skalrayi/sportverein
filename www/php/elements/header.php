@@ -1,9 +1,3 @@
-<?php
-session_start();
-include __DIR__ . "/../Utility.php";
-Utility::redirectIfNotLoggedIn();
-
-?>
 <html>
 <head>
     <title>Sportverein</title>
