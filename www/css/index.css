@@ -159,10 +159,23 @@ form.search input {
     display: flex;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 576px) {
     .list-row .col,
     .list-row .col.edit {
-        flex-basis: content;
+        flex-basis: 20%;
+    }
+}
+@media (min-width: 1200px) {
+    .list-row .col,
+    .list-row .col.edit {
+        flex-basis: 10%;
+    }
+    .list-row .id {
+        flex-basis: 5%;
+    }
+    .list-row .forename,
+    .list-row .surname {
+        flex-basis: 12.5%;
     }
 }
 
