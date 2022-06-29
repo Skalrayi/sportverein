@@ -29,15 +29,15 @@ class MemberModel extends Database
     public function insertNewUser(array $data): bool {
         // Wenn bei den übergebenen Daten nicht alle benötigten Felder dabei sind, dann wird nichts inserted und false returned
         foreach (self::REQUIRED_FIELDS as $field) {
-            if (!array_key_exists($field)) {
+            if (!array_key_exists($field, $data)) {
                 return false;
             }
         }
 
         $stmt = 'INSERT INTO mitglied (vorname, nachname, plz, ort, geschlecht, or_id, gb_id)
                  VALUES (?, ?, ?, ?, ?, ?, ?)';
-        $stmt = $this->run($stmt, $data);
-        $stmt->rrrsdreturn true;
+        $this->run($stmt, $data);
+        return true;
     }
 
     public function getAllMembers(): array {

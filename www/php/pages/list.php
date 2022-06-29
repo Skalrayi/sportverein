@@ -1,7 +1,11 @@
 <?php
 include __DIR__ . "/../elements/header.php";
 include __DIR__ . "/../elements/navbar.php";
-include __DIR__ . "/../MemberRepository.php";
+/**
+ * @var array $userData
+ * @var int|null $page
+ * @var int $lastPage
+ */
 ?>
 
 <div class="container body-list">
@@ -32,13 +36,6 @@ include __DIR__ . "/../MemberRepository.php";
             <div class="col money">Grundbeitrag</div>
             <div class="col edit">Bearbeiten</div>
         </div>
-        <?php
-            $memberRepository = new MemberModel();
-
-            $page = $_GET['page'] ?? null;
-
-            $userData = $memberRepository->getAllMembersWithGrundbeitrag(null, $page);
-        ?>
         <?php foreach ($userData as $user) : ?>
             <div class="row list-row">
                 <div class="col id"><?= $user['mi_id'] ?></div>
@@ -74,11 +71,12 @@ include __DIR__ . "/../MemberRepository.php";
                     <input type="number" class="form-control" placeholder="z.B. 20" min="1" value="<?= isset($_GET['page']) ? $_GET[$page] : '' ?>">
                 </form>
                 <div class="arrows">
+                    <?php // TODO auslagern in den Controller und nur der View die Variablen übergeben, logik dafür noch bauen!!! ?>
                     <a href="./list.php?page=1"><i class="fa fa-long-arrow-left" aria-hidden="true"></i></a>
                     <a href="<?= isset($_GET['page']) ? ($_GET['page'] == 1 ? './list.php?page=1' : './list.php?page=' . $_GET['page'] - 1) : './list.php?page=1' ?>"><i class="fa fa-arrow-left" aria-hidden="true"></i></a>
                     <a href="<?= isset($_GET['page']) ? './list.php?page=' . $_GET['page'] + 1 : './list.php?page=2' ?>"><i class="fa fa-arrow-right" aria-hidden="true"></i></a>
                     <?php //TODO amountPerPage muss gemacht werden!!!?>
-                    <a href="<?= './list.php?page=' . Utility::calculateLastPage($memberRepository->getCountOfAllMembers(), 15) ?>"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
+                    <a href="<?= './list.php?page=' . $lastPage ?>"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
                 </div>
             </div>
         </div>
