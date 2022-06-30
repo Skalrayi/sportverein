@@ -4,6 +4,7 @@ include __DIR__ . '/model/MemberModel.php';
 
 $accessController = new AccessController();
 
+// Wenn man angemeldet ist, wird die liste eingebunden, wenn nicht, dann wird zurück zum index weitergeleitet
 if ($accessController->isLoggedIn()) {
     $memberModel = new MemberModel();
 

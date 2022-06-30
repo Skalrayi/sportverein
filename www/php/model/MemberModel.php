@@ -11,14 +11,30 @@ class MemberModel extends Database
         return $this->run('SELECT * FROM mitglied WHERE id = ?', [$id])->fetch();
     }
 
-    public function updateMember(int $id, array $data) {
-        $stmt = 'UPDATE mitglied WHERE id = ' . $id . ' SET ';
-        foreach (array_keys($data) as $fieldName) {
-            $stmt .= $fieldName . ' = ' . $data[$fieldName];
+    /**
+     * @param int $id
+     * @param array $data
+     * @return bool
+     */
+    public function updateMember(int $id, array $data): bool {
+        // Überprüfen, ob alle notwendigen Daten im array vorhanden sind
+        foreach (self::REQUIRED_FIELDS as $field) {
+            if ($data[$field] === null) {
+                return false;
+            }
         }
-        $stmt .= ' WHERE id = ?' . $id;
 
-        $this->run($stmt);
+        $vorname = $data['forename'];
+        $nachname = $data['surname'];
+        $plz = $data['zip'];
+        $ort = $data['city'];
+        $geschlecht = $data['gender'];
+        // TODO sportarten
+
+        $stmt = 'UPDATE mitglied SET vorname = ?, nachname = ?, plz = ?, ort = ?, geschlecht = ? WHERE id = ?';
+
+        $this->run($stmt, [$vorname, $nachname, $plz, $ort, $geschlecht, $id]);
+        return true;
     }
 
     /**
@@ -87,6 +103,16 @@ class MemberModel extends Database
     public function getCountOfAllMembers(): int {
         $stmt = 'SELECT * FROM mitglied';
         return $this->run($stmt)->rowCount();
+    }
+
+    public function getAllMembersWithSearchParameter(string $searchParameter)
+    {
+        $stmt = 'SELECT * FROM mitglied 
+         WHERE vorname LIKE "%?%" 
+           AND nachname LIKE "%?%" 
+           AND plz LIKE ? "%?%"
+           AND ort LIKE ? "%?%"';
+        $this->run($stmt, [$searchParameter, $searchParameter, $searchParameter, $searchParameter]);
     }
 
 }

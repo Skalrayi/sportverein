@@ -25,7 +25,7 @@
                 <div class="row mb-3">
                     <div class="col-12 col-md-6">
                         <label for="zip" class="form-label">PLZ *</label>
-                        <input type="text" class="form-control" id="zip" name="zip" required>
+                        <input type="text" class="form-control" maxlength="6" id="zip" name="zip" required>
                     </div>
                     <div class="col-12 col-md-6">
                         <label for="city" class="form-label">Ort *</label>
@@ -74,28 +74,28 @@
                 <div class="row mb-3">
                     <div class="col-12 col-md-6">
                         <label for="forename" class="form-label">Vorname *</label>
-                        <input type="text" class="form-control" id="forename" name="forename" required>
+                        <input type="text" class="form-control" id="forename" name="forename" value="<?= $forname ?>" required>
                     </div>
                     <div class="col-12 col-md-6">
                         <label for="surname" class="form-label">Nachname *</label>
-                        <input type="text" class="form-control" id="surname" name="surname" required>
+                        <input type="text" class="form-control" id="surname" name="surname" value="<?= $surname ?>" required>
                     </div>
                 </div>
                 <div class="row mb-3">
                     <div class="col-12 col-md-6">
                         <label for="zip" class="form-label">PLZ *</label>
-                        <input type="text" class="form-control" id="zip" name="zip" required>
+                        <input type="text" class="form-control" id="zip" name="zip" value="<?= $zip ?>" required>
                     </div>
                     <div class="col-12 col-md-6">
                         <label for="city" class="form-label">Ort *</label>
-                        <input type="text" class="form-control" id="city" name="city" required>
+                        <input type="text" class="form-control" id="city" name="city" value="<?= $city ?>" required>
                     </div>
                 </div>
                 <div class="row mb-3">
                     <div class="col-12 col-md-6">
                         <label for="male" class="form-label">Geschlecht *</label>
-                        <select class="form-select" id="male" name="male"  required>
-                            <option selected>Geschlecht</option>
+                        <select class="form-select" id="male" name="gender"  required>
+                            <option disabled selected>Geschlecht</option>
                             <option value="male">Männlich</option>
                             <option value="female">Weiblich</option>
                         </select>
@@ -103,7 +103,7 @@
                     <div class="col-12 col-md-6">
                         <label for="sport" class="form-label">Sportarten *</label>
                         <select type="text" class="form-select mb-4" id="sport" name="sport" required>
-                            <option selected>Geschlecht</option>
+                            <option disabled selected>Geschlecht</option>
                             <option value="male">Männlich</option>
                             <option value="female">Weiblich</option>
                         </select>

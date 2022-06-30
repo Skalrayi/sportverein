@@ -10,7 +10,7 @@ class AccessController
             Utility::redirect('../list.php');
         }
         // wenn der Login nicht funktioniert wird einfach auf index mit der Fehlermeldung weitergeleitet
-        Utility::redirect('../index.php?login=false');
+        Utility::redirect('../../index.php?login=false');
     }
 
     public function logout() {
