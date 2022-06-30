@@ -26,15 +26,15 @@ include __DIR__ . "/../elements/navbar.php";
 
     <div class="list container">
         <div class="row list-row list-head">
-            <div class="col id">ID</div>
-            <div class="col surname">Nachname</div>
-            <div class="col forename">Vorname</div>
-            <div class="col zip">PLZ</div>
-            <div class="col city">Ort</div>
-            <div class="col male">Geschlecht</div>
-            <div class="col sport">Sportart</div>
-            <div class="col money">Grundbeitrag</div>
-            <div class="col edit">Bearbeiten</div>
+            <div class="col id"><span>ID</span></div>
+            <div class="col surname"><span>Nachname</span> <div class="filter"><a href="" class="ascending"></a> <a href="" class="descending"></a></div> </div>
+            <div class="col forename"><span>Vorname</span> <div class="filter"><a href="" class="ascending"></a> <a href="" class="descending"></a></div> </div>
+            <div class="col zip"><span>PLZ</span> <div class="filter"><a href="" class="ascending"></a> <a href="" class="descending"></a></div> </div>
+            <div class="col city"><span>Ort</span> <div class="filter"><a href="" class="ascending"></a> <a href="" class="descending"></a></div> </div>
+            <div class="col male"><span>Geschlecht</span> <div class="filter"><a href="" class="ascending"></a> <a href="" class="descending"></a></div> </div>
+            <div class="col sport"><span>Sportart</span> <div class="filter"><a href="" class="ascending"></a> <a href="" class="descending"></a></div> </div>
+            <div class="col money"><span>Grundbeitrag</span></div>
+            <div class="col edit"><span>Bearbeiten</span></div>
         </div>
         <?php foreach ($userData as $user) : ?>
             <div class="row list-row">

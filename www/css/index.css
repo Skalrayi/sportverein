@@ -159,8 +159,11 @@ form.search input {
 }
 
 .list-row .col {
-    padding: 1rem;
+    padding: 1rem .5rem;
     flex-basis: 50%
+}
+.list-row .col span {
+    padding-right: .5rem;
 }
 .list-row .col.edit {
     flex-basis: 100%;
@@ -257,3 +260,27 @@ button.delete-button i {
     background-color: var(--grey);
 }
  */
+
+/* Filter Arrows */
+
+.list-row .filter {
+    display: inline-block;
+}
+.ascending {
+    transform: translateY(-2.5px) rotate(45deg);
+    display: inline-block;
+    height: 10px;
+    width: 10px;
+    border-right: 2px solid black;
+    border-bottom: 2px solid black;
+    margin: 0 1px;
+}
+.descending {
+    transform: translateY(2.5px) rotate(-135deg);
+    display: inline-block;
+    height: 10px;
+    width: 10px;
+    border-right: 2px solid black;
+    border-bottom: 2px solid black;
+    margin: 0 1px;
+}
