@@ -16,7 +16,7 @@ class MemberModel extends Database
         foreach (array_keys($data) as $fieldName) {
             $stmt .= $fieldName . ' = ' . $data[$fieldName];
         }
-        $stmt .= ' WHERE id = ' . $id;
+        $stmt .= ' WHERE id = ?' . $id;
 
         $this->run($stmt);
     }
@@ -80,7 +80,9 @@ class MemberModel extends Database
     }
 
     /**
-     * @return int gibt die Anzahl aller in der Datenbank vorhandenen Mitglieder an
+     * gibt die Anzahl aller in der Datenbank vorhandenen Mitglieder an
+     *
+     * @return int
      */
     public function getCountOfAllMembers(): int {
         $stmt = 'SELECT * FROM mitglied';

@@ -35,7 +35,7 @@ class CRUDController
     public function delete() {
         // Wenn man nicht angemeldet ist, dann darf man nicht löschen!
         if (!AccessModel::isLoggedIn()) {
-            echo "hallo";
+            die();
         }
 
         // Intcast, da die Sachen im POST array als string gespeichert sind
@@ -48,4 +48,12 @@ class CRUDController
         Utility::redirect('../list.php');
     }
 
+    public function edit() {
+        if (!AccessModel::isLoggedIn()) {
+            die();
+        }
+
+        $id = (int)$_POST['id'];
+
+    }
 }
