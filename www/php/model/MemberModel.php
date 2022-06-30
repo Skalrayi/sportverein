@@ -3,7 +3,8 @@ require_once __DIR__ . '/../Database.php';
 
 class MemberModel extends Database
 {
-    private const REQUIRED_FIELDS = ['forename', 'surname', 'zip', 'city', 'gender', 'sport'];
+    // TODO sportarten müssen hier gemacht werden, dann kann hier auch sport rein!
+    private const REQUIRED_FIELDS = ['forename', 'surname', 'zip', 'city', 'gender'];
     private const DEFAULT_AMOUNT_PER_PAGE = 15;
 
     public function findById(int $id) {
@@ -28,11 +29,12 @@ class MemberModel extends Database
      */
     public function insertNewUser(array $data): bool {
         // Wenn bei den übergebenen Daten nicht alle benötigten Felder dabei sind, dann wird nichts inserted und false returned
-        foreach (self::REQUIRED_FIELDS as $field) {
-            if (!array_key_exists($field, $data)) {
-                return false;
-            }
-        }
+//        foreach (self::REQUIRED_FIELDS as $field) {
+//            if (!array_key_exists($field, $data)) {
+//                echo $field;
+//                return false;
+//            }
+//        }
 
         $stmt = 'INSERT INTO mitglied (vorname, nachname, plz, ort, geschlecht, or_id, gb_id)
                  VALUES (?, ?, ?, ?, ?, ?, ?)';
@@ -56,7 +58,7 @@ class MemberModel extends Database
             $stmt .= ' LIMIT ' . $amount;
         }
 
-        // Berechnung für die Anzahl je nach Seite und eingegebem Amount
+        // Berechnung für die Anzahl je nach Seite und eingegebenem Amount
         if ($page && $amount) {
             $stmt .= ' OFFSET ' . ($amount * $page);
         } else if ($page && !$amount) {
@@ -66,11 +68,20 @@ class MemberModel extends Database
         return $this->run($stmt)->fetchAll();
     }
 
+    /**
+     * Löscht ein Mitglied anhand der übergebenen ID
+     *
+     * @param int $id
+     * @return void
+     */
     public function deleteMemberById(int $id) {
-        $stmt = 'DELETE FROM mitglied WHERE id = ?';
+        $stmt = 'DELETE FROM mitglied WHERE mi_id = ?';
         $this->run($stmt, [$id]);
     }
 
+    /**
+     * @return int gibt die Anzahl aller in der Datenbank vorhandenen Mitglieder an
+     */
     public function getCountOfAllMembers(): int {
         $stmt = 'SELECT * FROM mitglied';
         return $this->run($stmt)->rowCount();

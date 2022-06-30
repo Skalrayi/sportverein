@@ -11,7 +11,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="../actions/insert.php" method="post">
+            <form action="/php/actions/insert.php" method="post">
                 <div class="row mb-3">
                     <div class="col-12 col-md-6">
                         <label for="forename" class="form-label">Vorname *</label>
@@ -117,7 +117,7 @@
 </div>
 
 <!-- Delete Modal -->
-<div class="modal fade" id="deletemember" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<div class="modal fade deletemember" id="deletemember" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -129,7 +129,8 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="./../actions/delete.php" method="post">
+            <form action="/php/actions/delete.php" method="post">
+                <input type="hidden" name="id" id="id-field">
                 <button type="submit" class="btn btn-default submit-delete d-block w-100">Löschen</button>
             </form>
         </div>

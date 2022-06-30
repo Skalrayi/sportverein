@@ -50,7 +50,7 @@ include __DIR__ . "/../elements/navbar.php";
                     <button type="button" class="edit-button" data-bs-toggle="modal" data-bs-target="#editmember">
                         <i class="fa fa-pencil" aria-hidden="true"></i>
                     </button>
-                    <button type="button" class="delete-button" data-bs-toggle="modal" data-bs-target="#deletemember">
+                    <button type="button" class="delete-button" data-bs-toggle="modal" data-bs-target="#deletemember" data-id="<?= $user['mi_id'] ?>">
                         <i class="fa fa-trash" aria-hidden="true"></i>
                     </button>
                 </div>
@@ -71,6 +71,7 @@ include __DIR__ . "/../elements/navbar.php";
                     <input type="number" class="form-control" placeholder="z.B. 20" min="1" value="<?= isset($_GET['page']) ? $_GET[$page] : '' ?>">
                 </form>
                 <div class="arrows">
+                    <?php // TODO paginagin auslagern und überarbeiten ?>
                     <?php // TODO auslagern in den Controller und nur der View die Variablen übergeben, logik dafür noch bauen!!! ?>
                     <a href="./list.php?page=1"><i class="fa fa-long-arrow-left" aria-hidden="true"></i></a>
                     <a href="<?= isset($_GET['page']) ? ($_GET['page'] == 1 ? './list.php?page=1' : './list.php?page=' . $_GET['page'] - 1) : './list.php?page=1' ?>"><i class="fa fa-arrow-left" aria-hidden="true"></i></a>

@@ -1,17 +1,11 @@
 <?php
-session_start();
-include __DIR__ . "/../Utility.php";
-
-if (!Utility::checkIfLoggedIn()) {
-    // Wenn man nicht angemeldet ist, soll das Skript sterben, falls man die URL so aufruft.
+//TODO entweder im anderen Controller rein oder immer selbständig bei den actions???
+require_once __DIR__ . '/../controller/AccessController.php';
+require_once __DIR__ . '/../controller/CRUDController.php';
+$accessController = new AccessController();
+// Wenn man nicht angemeldet ist, darf man nicht löschen
+if (!$accessController->isLoggedIn()) {
     die();
 }
-
-include __DIR__ . "/../MemberRepository.php";
-
-$id = $_POST['id'];
-
-$memberRepository = new MemberModel();
-$memberRepository->deleteMemberById($id);
-
-Utility::redirect('./../pages/list.php');
+$crudController = new CRUDController();
+$crudController->delete();

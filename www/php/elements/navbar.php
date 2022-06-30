@@ -9,7 +9,7 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="../actions/logout.php"><?php echo $_SESSION['username'] ?> <i class="fa fa-sign-in" aria-hidden="true"></i></a>
+                    <a class="nav-link" href="/php/actions/logout.php"><?php echo $_SESSION['username'] ?> <i class="fa fa-sign-in" aria-hidden="true"></i></a>
                 </li>
             </ul>
         </div>
