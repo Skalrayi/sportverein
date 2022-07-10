@@ -59,7 +59,6 @@ class MemberModel extends Database
         return true;
     }
 
-    // TODO sportarten vielleicht noch gleich mit hier rein????
     public function getAllMembers(int $amount = null, int $page = null): array {
         $stmt = 'SELECT m.*, GROUP_CONCAT(s.abteilung) as abteilung FROM mitglied m 
                 LEFT JOIN mitglied_sportart ms ON m.mi_id = ms.mi_id
@@ -121,13 +120,21 @@ class MemberModel extends Database
         return $this->run($stmt)->rowCount();
     }
 
+    /**
+     * Gibt Member zurück, die dem Suchkriterium entsprechen
+     * @param string $searchParameter
+     * @return array
+     */
     public function getAllMembersWithSearchParameter(string $searchParameter): array
     {
-        $stmt = 'SELECT * FROM mitglied
+        $stmt = 'SELECT m.*, GROUP_CONCAT(s.abteilung) as abteilung FROM mitglied m 
+                LEFT JOIN mitglied_sportart ms ON m.mi_id = ms.mi_id
+                LEFT JOIN sportart s ON ms.sa_id = s.sa_id
          WHERE vorname LIKE ? 
            OR nachname LIKE ?
            OR plz LIKE ?
-           OR ort LIKE ?';
+           OR ort LIKE ?
+           GROUP BY m.mi_id';
 
         //überall wildcards
        return $this->run($stmt, [
