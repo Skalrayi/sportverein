@@ -8,7 +8,7 @@ class MemberModel extends Database
     private const DEFAULT_AMOUNT_PER_PAGE = 15;
 
     public function findById(int $id) {
-        return $this->run('SELECT * FROM mitglied WHERE id = ?', [$id])->fetch();
+        return $this->run('SELECT * FROM mitglied WHERE mi_id = ?', [$id])->fetch();
     }
 
     /**
@@ -58,15 +58,9 @@ class MemberModel extends Database
         return true;
     }
 
-    public function getAllMembers(): array {
-        $stmt = 'SELECT * FROM mitglied';
-        return $this->run($stmt)->fetchAll();
-    }
-
     // TODO sportarten vielleicht noch gleich mit hier rein????
-    public function getAllMembersWithGrundbeitrag(int $amount = null, int $page = null): array {
-        $stmt = 'SELECT m.*, gb.beitrag FROM mitglied m 
-                 LEFT JOIN grundbeitrag gb ON gb.gb_id = m.gb_id';
+    public function getAllMembers(int $amount = null, int $page = null): array {
+        $stmt = 'SELECT * FROM mitglied';
 
         if (!$amount) {
             $stmt .= ' LIMIT ' . self::DEFAULT_AMOUNT_PER_PAGE;
@@ -85,13 +79,31 @@ class MemberModel extends Database
     }
 
     /**
-     * Löscht ein Mitglied anhand der übergebenen ID
+     * Löscht ein Mitglied und die dazugehörigen Verknüpfungen zur Sportart
      *
      * @param int $id
      * @return void
      */
-    public function deleteMemberById(int $id) {
+    public function deleteMemberAndLinkedSportartByMemberId(int $id) {
+        $this->deleteLinkedSportartByMemberId($id);
+        $this->deleteMemberById($id);
+    }
+
+    /**
+     * Löscht ein Mitglied anhand der übergebenen ID
+     * @param int $id
+     */
+    private function deleteMemberById(int $id) {
         $stmt = 'DELETE FROM mitglied WHERE mi_id = ?';
+        $this->run($stmt, [$id]);
+    }
+
+    /**
+     * Löscht in der Beziehungstabelle die Verknüpfungen zwischen Sportart und Mitglied
+     * @param int $id
+     */
+    private function deleteLinkedSportartByMemberId(int $id) {
+        $stmt = 'DELETE FROM mitglied_sportart WHERE mi_id = ?';
         $this->run($stmt, [$id]);
     }
 
@@ -105,14 +117,21 @@ class MemberModel extends Database
         return $this->run($stmt)->rowCount();
     }
 
-    public function getAllMembersWithSearchParameter(string $searchParameter)
+    public function getAllMembersWithSearchParameter(string $searchParameter): array
     {
-        $stmt = 'SELECT * FROM mitglied 
-         WHERE vorname LIKE "%?%" 
-           AND nachname LIKE "%?%" 
-           AND plz LIKE ? "%?%"
-           AND ort LIKE ? "%?%"';
-        $this->run($stmt, [$searchParameter, $searchParameter, $searchParameter, $searchParameter]);
+        $stmt = 'SELECT * FROM mitglied
+         WHERE vorname LIKE ? 
+           OR nachname LIKE ?
+           OR plz LIKE ?
+           OR ort LIKE ?';
+
+        //überall wildcards
+       return $this->run($stmt, [
+            '%' . $searchParameter . '%',
+            '%' . $searchParameter . '%',
+            '%' . $searchParameter . '%',
+            '%' . $searchParameter . '%'
+        ])->fetchAll();
     }
 
 }

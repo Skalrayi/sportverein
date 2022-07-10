@@ -52,7 +52,7 @@ class CRUDController
         $id = (int)$_POST['id'];
 
         $memberModel = new MemberModel();
-        $memberModel->deleteMemberById($id);
+        $memberModel->deleteMemberAndLinkedSportartByMemberId($id);
 
         //redirect zur Liste
         Utility::redirect('../list.php');

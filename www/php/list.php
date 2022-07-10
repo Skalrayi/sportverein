@@ -10,10 +10,27 @@ if ($accessController->isLoggedIn()) {
 
     // Variablen für die View vorbelegen
     $page = $_GET['page'] ?? null;
-    $userData = $memberModel->getAllMembersWithGrundbeitrag(null, $page);
+    $userData = $memberModel->getAllMembers(null, $page) ?? [];
     $countOfAllMembers = $memberModel->getCountOfAllMembers();
-    $lastPage = Utility::calculateLastPage($memberModel->getCountOfAllMembers(), 15);
-    //
+    $lastPage = Utility::calculateLastPage($countOfAllMembers, 15);
+
+    // wenn edit gesetzt ist, dann wird das Modal ausgefahren und braucht seine Variablen.
+    if (isset($_GET['edit'])) {
+        $editMember = $memberModel->findById($_GET['edit']);
+        $forename = $editMember['vorname'];
+        $surname = $editMember['nachname'];
+        $zip = $editMember['plz'];
+        $city = $editMember['ort'];
+        $gender = $editMember['geschlecht'];
+    }
+
+    if (isset($_GET['search'])) {
+        $userData = $memberModel->getAllMembersWithSearchParameter($_GET['search']) ?? [];
+        $countOfAllMembers = count($userData);
+        $lastPage = Utility::calculateLastPage($countOfAllMembers, 15);
+    }
+
+    // Seite einbinden;
     include __DIR__ . '/pages/list.php';
 } else {
     Utility::redirect('../index.php');

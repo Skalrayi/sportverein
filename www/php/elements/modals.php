@@ -1,3 +1,12 @@
+<?php
+/**
+ * @var string $forename
+ * @var string $surname
+ * @var string $zip
+ * @var string $city
+ * @var string $gender
+ */
+?>
 <!-- Add Modal -->
 <div class="modal fade" id="addmember" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -58,7 +67,7 @@
 </div>
 
 <!-- Edit Modal -->
-<div class="modal fade" id="editmember" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<div class="modal " id="editmember" tabindex="-1" role="dialog" data-show="true" data-backdrop="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -74,7 +83,7 @@
                 <div class="row mb-3">
                     <div class="col-12 col-md-6">
                         <label for="forename" class="form-label">Vorname *</label>
-                        <input type="text" class="form-control" id="forename" name="forename" value="<?= $forname ?>" required>
+                        <input type="text" class="form-control" id="forename" name="forename" value="<?= $forename ?>" required>
                     </div>
                     <div class="col-12 col-md-6">
                         <label for="surname" class="form-label">Nachname *</label>
@@ -95,9 +104,9 @@
                     <div class="col-12 col-md-6">
                         <label for="male" class="form-label">Geschlecht *</label>
                         <select class="form-select" id="male" name="gender"  required>
-                            <option disabled selected>Geschlecht</option>
-                            <option value="male">Männlich</option>
-                            <option value="female">Weiblich</option>
+                            <option disabled>Geschlecht</option>
+                            <option <?= $gender == 'm' ? 'selected' : '' ?> value="male">Männlich</option>
+                            <option <?= $gender == 'w' ? 'selected' : '' ?> value="female">Weiblich</option>
                         </select>
                     </div>
                     <div class="col-12 col-md-6">

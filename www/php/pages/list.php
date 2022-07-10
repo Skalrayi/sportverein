@@ -19,11 +19,11 @@ include __DIR__ . "/../elements/navbar.php";
         <?php if (isset($_GET['missingParameters'])) : //TODO html anpassen ?>
             <p class="color-red">Fehlerhafte Eingaben!</p>
         <?php endif; ?>
-        <form class="search" action="list.php" method="post">
+        <form class="search" action="list.php" method="get">
             <input type="text" placeholder="Suche" name="search">
         </form>
     </div>
-
+    <?php if (!empty($userData)) : ?>
     <div class="list container">
         <div class="row list-row list-head">
             <div class="col id"><span>ID</span></div>
@@ -33,7 +33,6 @@ include __DIR__ . "/../elements/navbar.php";
             <div class="col city"><span>Ort</span> <div class="filter"><a href="" class="ascending"></a> <a href="" class="descending"></a></div> </div>
             <div class="col male"><span>Geschlecht</span> <div class="filter"><a href="" class="ascending"></a> <a href="" class="descending"></a></div> </div>
             <div class="col sport"><span>Sportart</span> <div class="filter"><a href="" class="ascending"></a> <a href="" class="descending"></a></div> </div>
-            <div class="col money"><span>Grundbeitrag</span></div>
             <div class="col edit"><span>Bearbeiten</span></div>
         </div>
         <?php foreach ($userData as $user) : ?>
@@ -45,11 +44,10 @@ include __DIR__ . "/../elements/navbar.php";
                 <div class="col city"><?= $user['ort'] ?></div>
                 <div class="col male"><?= $user['geschlecht'] ?></div>
                 <div class="col sport"><?= $user['or_id'] ?></div>
-                <div class="col money"><?= $user['beitrag'] ?></div>
                 <div class="col edit">
-                    <button type="button" class="edit-button" data-bs-toggle="modal" data-bs-target="#editmember">
+                    <a type="button" class="edit-button"  href="<?= Utility::buildEditLink($user['mi_id'])?>">
                         <i class="fa fa-pencil" aria-hidden="true"></i>
-                    </button>
+                    </a>
                     <button type="button" class="delete-button" data-bs-toggle="modal" data-bs-target="#deletemember" data-id="<?= $user['mi_id'] ?>">
                         <i class="fa fa-trash" aria-hidden="true"></i>
                     </button>
@@ -82,6 +80,12 @@ include __DIR__ . "/../elements/navbar.php";
             </div>
         </div>
     </div>
+    <?php else : ?>
+    <div class="no-results">
+        <p>Keine Ergebnisse</p>
+        <a href="javascript:history.back()">Zurück</a>
+    </div>
+    <?php endif; ?>
 </div>
 
 <?php
