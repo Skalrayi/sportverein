@@ -82,5 +82,7 @@ class CRUDController
         $memberModel = new MemberModel();
         // TODO sportarten
         $memberModel->updateMember($id, ['surname' => $surname, 'forename' => $forename, 'zip' => $zip, 'city' => $city, 'gender' => $gender]);
+        // zurück zur Liste
+        Utility::redirect('../list.php');
     }
 }

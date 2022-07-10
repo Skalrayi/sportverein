@@ -29,9 +29,10 @@ class MemberModel extends Database
         $plz = $data['zip'];
         $ort = $data['city'];
         $geschlecht = $data['gender'];
+
         // TODO sportarten
 
-        $stmt = 'UPDATE mitglied SET vorname = ?, nachname = ?, plz = ?, ort = ?, geschlecht = ? WHERE id = ?';
+        $stmt = 'UPDATE mitglied SET vorname = ?, nachname = ?, plz = ?, ort = ?, geschlecht = ? WHERE mi_id = ?';
 
         $this->run($stmt, [$vorname, $nachname, $plz, $ort, $geschlecht, $id]);
         return true;

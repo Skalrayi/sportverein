@@ -8,6 +8,14 @@ include __DIR__ . "/../elements/navbar.php";
  */
 ?>
 
+<?php if (isset($_GET['edit'])) : ?>
+<?php // wenn man editieren will, dann kommt das Editmodal ausgefahren mit Einflug und Backdrop ?>
+    <script type="text/javascript">
+        $(window).on('load', function() {
+            $('#editmember').modal('show');
+        });
+    </script>
+<?php endif; ?>
 <div class="container body-list">
     <div class="mb-5 mt-5">
         <h1>Mitgliederverwaltung</h1>
@@ -43,7 +51,7 @@ include __DIR__ . "/../elements/navbar.php";
                 <div class="col zip"><?= $user['plz'] ?></div>
                 <div class="col city"><?= $user['ort'] ?></div>
                 <div class="col male"><?= $user['geschlecht'] ?></div>
-                <div class="col sport"><?= $user['abteilung'] ?></div>
+                <div class="col sport"><?= $user['abteilung'] ?? '/' ?></div>
                 <div class="col edit">
                     <a type="button" class="edit-button"  href="<?= Utility::buildEditLink($user['mi_id'])?>">
                         <i class="fa fa-pencil" aria-hidden="true"></i>

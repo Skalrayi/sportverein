@@ -5,6 +5,7 @@
  * @var string $zip
  * @var string $city
  * @var string $gender
+ * @var int $id
  */
 ?>
 <!-- Add Modal -->
@@ -54,8 +55,8 @@
                         <label for="sport" class="form-label">Sportarten *</label>
                         <select type="text" class="form-select mb-4" id="sport" name="sport" required>
                             <option selected disabled value="">Geschlecht</option>
-                            <option value="male">Männlich</option>
-                            <option value="female">Weiblich</option>
+                            <option value="m">Männlich</option>
+                            <option value="w">Weiblich</option>
                         </select>
                         <button type="submit" class="btn btn-default submit-edit d-block w-100">Speichern</button>
                     </div>
@@ -67,7 +68,7 @@
 </div>
 
 <!-- Edit Modal -->
-<div class="modal " id="editmember" tabindex="-1" role="dialog" data-show="true" data-backdrop="true">
+<div class="modal fade in" id="editmember" tabindex="-1" role="dialog" data-show="true" data-backdrop="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -79,7 +80,8 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="" method="post">
+            <form action="/php/actions/edit.php" method="post">
+                <input type="hidden" name="id" value="<?= $id ?>">
                 <div class="row mb-3">
                     <div class="col-12 col-md-6">
                         <label for="forename" class="form-label">Vorname *</label>
@@ -105,8 +107,8 @@
                         <label for="male" class="form-label">Geschlecht *</label>
                         <select class="form-select" id="male" name="gender"  required>
                             <option disabled>Geschlecht</option>
-                            <option <?= $gender == 'm' ? 'selected' : '' ?> value="male">Männlich</option>
-                            <option <?= $gender == 'w' ? 'selected' : '' ?> value="female">Weiblich</option>
+                            <option <?= $gender == 'm' ? 'selected' : '' ?> value="m">Männlich</option>
+                            <option <?= $gender == 'w' ? 'selected' : '' ?> value="w">Weiblich</option>
                         </select>
                     </div>
                     <div class="col-12 col-md-6">

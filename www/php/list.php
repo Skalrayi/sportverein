@@ -22,6 +22,7 @@ if ($accessController->isLoggedIn()) {
         $zip = $editMember['plz'];
         $city = $editMember['ort'];
         $gender = $editMember['geschlecht'];
+        $id = $editMember['mi_id'];
     }
 
     if (isset($_GET['search'])) {
