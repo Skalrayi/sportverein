@@ -60,7 +60,10 @@ class MemberModel extends Database
 
     // TODO sportarten vielleicht noch gleich mit hier rein????
     public function getAllMembers(int $amount = null, int $page = null): array {
-        $stmt = 'SELECT * FROM mitglied';
+        $stmt = 'SELECT m.*, GROUP_CONCAT(s.abteilung) as abteilung FROM mitglied m 
+                LEFT JOIN mitglied_sportart ms ON m.mi_id = ms.mi_id
+                LEFT JOIN sportart s ON ms.sa_id = s.sa_id
+                GROUP BY m.mi_id';
 
         if (!$amount) {
             $stmt .= ' LIMIT ' . self::DEFAULT_AMOUNT_PER_PAGE;

@@ -43,7 +43,7 @@ include __DIR__ . "/../elements/navbar.php";
                 <div class="col zip"><?= $user['plz'] ?></div>
                 <div class="col city"><?= $user['ort'] ?></div>
                 <div class="col male"><?= $user['geschlecht'] ?></div>
-                <div class="col sport"><?= $user['or_id'] ?></div>
+                <div class="col sport"><?= $user['abteilung'] ?></div>
                 <div class="col edit">
                     <a type="button" class="edit-button"  href="<?= Utility::buildEditLink($user['mi_id'])?>">
                         <i class="fa fa-pencil" aria-hidden="true"></i>
