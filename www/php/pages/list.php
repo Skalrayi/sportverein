@@ -64,7 +64,7 @@ include __DIR__ . "/../elements/navbar.php";
         <?php endforeach; ?>
 
         <div class="row list-row list-pagination">
-            <div class="results">
+            <div class="results d-none">
                 <p>Ergebnisse pro Seite</p>
                 <form action="" method="get">
                     <input type="number" class="form-control" name="amount" placeholder="z.B. 20" min="1">
@@ -72,10 +72,12 @@ include __DIR__ . "/../elements/navbar.php";
                 <p class="color-grey"> 1 - 20 von 120</p>
             </div>
             <div class="page">
-                <p>Aktuelle Seite</p>
-                <form action="" method="get">
-                    <input type="number" class="form-control" placeholder="z.B. 20" min="1" value="<?= isset($_GET['page']) ? $_GET[$page] : '' ?>">
-                </form>
+                <div class="curren-page d-none">
+                    <p>Aktuelle Seite</p>
+                    <form action="" method="get">
+                        <input type="number" class="form-control" placeholder="z.B. 20" min="1" value="<?= isset($_GET['page']) ? $_GET[$page] : '' ?>">
+                    </form>
+                </div>
                 <div class="arrows">
                     <?php // TODO paginagin auslagern und überarbeiten ?>
                     <?php // TODO auslagern in den Controller und nur der View die Variablen übergeben, logik dafür noch bauen!!! ?>
