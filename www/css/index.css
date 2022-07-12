@@ -249,7 +249,7 @@ button.delete-button i {
 
 .list-pagination .arrows {
     display: flex;
-    gap: 1rem;
+    gap: 2rem;
 }
 
 /** MODALs **/
