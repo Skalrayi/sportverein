@@ -19,13 +19,18 @@ class CRUDController
         // alle Variablen aus dem Request ziehen und schauen, ob sie da sind, ansonsten mit null belegen
         $forename = trim($_POST['forename']) ?? null;
         $surname = trim($_POST['surname']) ?? null;
-        //TODO plz prüfen
         $zip = trim($_POST['zip']) ?? null;
+        // redirecten wenn PLZ mehr als 6 ist, da die Datenbank nur 6 Zeichen erlaubt.
+        if (strlen($zip) > 6) {
+            Utility::redirect('../list.php?zip=false');
+        }
         $city = trim($_POST['city']) ?? null;
-        //TODO prüfen, ob "w" oder "m"
         $gender = trim($_POST['gender']) ?? null;
+        // nur m oder w ist erlaubt
+        if ($gender != 'm' || $gender != 'w') {
+            Utility::redirect('../list.php?gender=false');
+        }
         $sportarten = $_POST['sport'] ?? null;
-        $page = $_GET['page'] ?? null;
         //TODO sportarten
 
         $memberModel = new MemberModel();
@@ -73,11 +78,20 @@ class CRUDController
         if (!$id) {
             die();
         }
+
         $surname = $_POST['surname'] ?? null;
         $forename = $_POST['forename'] ?? null;
         $zip = $_POST['zip'] ?? null;
+        // Wenn irgendwie eine Postleitzahl größer 6 eingefügt wird, einfach redirecten, da es nicht erlaubt ist.
+        if (strlen($zip) > 6) {
+            Utility::redirect('../list.php?zip=false');
+        }
         $city = $_POST['city'] ?? null;
         $gender = $_POST['gender'] ?? null;
+        // Nur m oder w ist erlaubt
+        if ($gender != 'm' || $gender != 'w') {
+            Utility::redirect('../list.php?gender=false');
+        }
 
         $memberModel = new MemberModel();
         // TODO sportarten

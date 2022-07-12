@@ -1,7 +1,7 @@
 <?php
 session_start();
 require_once __DIR__ . '/../Database.php';
-class AccessModel
+class AccessModel extends Database
 {
     public static function loginUser($username, $password): bool
     {

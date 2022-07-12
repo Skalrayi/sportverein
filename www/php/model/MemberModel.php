@@ -74,7 +74,7 @@ class MemberModel extends Database
         // Berechnung für die Anzahl je nach Seite und eingegebenem Amount
         if ($page && $amount) {
             $stmt .= ' OFFSET ' . ($amount * $page);
-        } else if ($page && !$amount) {
+        } else if ($page) {
             $stmt .= ' OFFSET ' . (($page - 1) * self::DEFAULT_AMOUNT_PER_PAGE);
         }
 
