@@ -219,8 +219,8 @@ form.search input {
     border-left: solid 1px var(--grey);
 }
 
-button.edit-button i,
-button.delete-button i {
+.edit-button i,
+.delete-button i {
     font-size: 1.5rem;
 }
 
