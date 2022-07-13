@@ -17,20 +17,25 @@ class CRUDController
         }
 
         // alle Variablen aus dem Request ziehen und schauen, ob sie da sind, ansonsten mit null belegen
-        $forename = trim($_POST['forename']) ?? null;
-        $surname = trim($_POST['surname']) ?? null;
-        $zip = trim($_POST['zip']) ?? null;
+        $forename = trim($_POST['forename'] ?? '');
+        $surname = trim($_POST['surname'] ?? '');
+        $zip = trim($_POST['zip'] ?? '');
         // redirecten wenn PLZ mehr als 6 ist, da die Datenbank nur 6 Zeichen erlaubt.
         if (strlen($zip) > 6) {
-            Utility::redirect('../list.php?zip=false');
+            Utility::redirect('../list.php?missingParameters=true');
         }
-        $city = trim($_POST['city']) ?? null;
-        $gender = trim($_POST['gender']) ?? null;
+        $city = trim($_POST['city'] ?? '');
+        $gender = trim($_POST['gender'] ?? '');
         // nur m oder w ist erlaubt
         if ($gender != 'm' && $gender != 'w') {
-            Utility::redirect('../list.php?gender=false');
+            Utility::redirect('../list.php?missingParameters=true');
         }
         $sportarten = $_POST['sport'] ?? null;
+
+        // wenn eines dieser Daten nicht da ist dann wurden ungültige Daten übertragen und somit redirect auf missingParameter
+        if (!$forename || !$surname || !$zip || !$city || !$gender) {
+            Utility::redirect('../list.php?missingParameters=true');
+        }
 
         $memberModel = new MemberModel();
         // Wenn der Insert nicht geht, dann fehlt ein Post Parameter und somit redirect auf ?missingParameter
@@ -79,20 +84,25 @@ class CRUDController
             die();
         }
 
-        $surname = $_POST['surname'] ?? null;
-        $forename = $_POST['forename'] ?? null;
-        $zip = $_POST['zip'] ?? null;
+        $surname = trim($_POST['surname'] ?? '');
+        $forename = trim($_POST['forename'] ?? '');
+        $zip = trim($_POST['zip'] ?? '');
         // Wenn irgendwie eine Postleitzahl größer 6 eingefügt wird, einfach redirecten, da es nicht erlaubt ist.
         if (strlen($zip) > 6) {
-            Utility::redirect('../list.php?zip=false');
+            Utility::redirect('../list.php?missingParameters=true');
         }
-        $city = $_POST['city'] ?? null;
-        $gender = $_POST['gender'] ?? null;
+        $city = trim($_POST['city'] ?? '');
+        $gender = trim($_POST['gender'] ?? '');
         // Nur m oder w ist erlaubt
         if ($gender != 'm' && $gender != 'w') {
-            Utility::redirect('../list.php?gender=false');
+            Utility::redirect('../list.php?missingParameters=true');
         }
         $sportarten = $_POST['sport'] ?? null;
+
+        // wenn eines dieser Daten nicht da ist dann wurden ungültige Daten übertragen und somit redirect auf missingParameter
+        if (!$forename || !$surname || !$zip || !$city || !$gender) {
+            Utility::redirect('../list.php?missingParameters=true');
+        }
 
         $memberModel = new MemberModel();
 
