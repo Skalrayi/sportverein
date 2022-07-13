@@ -27,9 +27,13 @@ include __DIR__ . "/../elements/navbar.php";
         <?php if (isset($_GET['missingParameters'])) : ?>
             <p class="color-red">Fehlerhafte Eingaben!</p>
         <?php endif; ?>
-        <form class="search" action="list.php" method="get">
-            <input type="text" maxlength="50" placeholder="Suche" name="search">
-        </form>
+        <div class="search-wrapper">
+            <i class="fa fa-search" aria-hidden="true"></i>
+            <form class="search" action="list.php" method="get">
+                <input type="text" maxlength="50" placeholder="Suche" name="search">
+            </form>
+        </div>
+
     </div>
     <?php if (!empty($userData)) : ?>
     <div class="list container">

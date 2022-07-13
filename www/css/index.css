@@ -84,6 +84,12 @@ button {
     color: black;
 }
 
+.nav-link.logout {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
 /** FOOTER **/
 
 footer {
@@ -94,6 +100,7 @@ footer {
     position: absolute;
     bottom: 0;
     left: 0;
+    color: white;
 }
 
 /** LOGIN SITE **/
@@ -140,11 +147,19 @@ footer {
     padding-bottom: 7rem;
 }
 
+i.fa {
+    font-size: 1.5rem;
+}
+
 .action-bar {
     display: flex;
     justify-content: space-between;
 }
-
+.search-wrapper {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+}
 form.search {
     margin-bottom: 0;
 }
@@ -262,6 +277,13 @@ button.delete-button i {
 .list-pagination .arrows {
     display: flex;
     gap: 2rem;
+}
+
+.list-pagination .arrows i {
+    transition: color .3s;
+}
+.list-pagination .arrows i:hover {
+    color: var(--red);
 }
 
 /** MODALs **/
