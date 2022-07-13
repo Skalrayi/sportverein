@@ -128,6 +128,10 @@ footer {
 
 /** LIST **/
 
+.list-row .filter {
+    display: none !important;
+}
+
 .col {
     flex: none;
 }
@@ -180,7 +184,7 @@ form.search input {
     .list-row .col,
     .list-row .col.edit {
         width: 20%;
-        overflow: scroll;
+        overflow-x: auto;
     }
 
     .list-row .id {
