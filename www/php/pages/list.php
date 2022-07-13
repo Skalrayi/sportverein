@@ -28,7 +28,7 @@ include __DIR__ . "/../elements/navbar.php";
             <p class="color-red">Fehlerhafte Eingaben!</p>
         <?php endif; ?>
         <form class="search" action="list.php" method="get">
-            <input type="text" placeholder="Suche" name="search">
+            <input type="text" maxlength="50" placeholder="Suche" name="search">
         </form>
     </div>
     <?php if (!empty($userData)) : ?>
