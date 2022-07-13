@@ -128,6 +128,10 @@ footer {
 
 /** LIST **/
 
+.list-row .filter {
+    display: none !important;
+}
+
 .col {
     flex: none;
 }
