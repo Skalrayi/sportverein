@@ -179,6 +179,14 @@ form.search input {
     display: flex;
 }
 
+.list .edit i {
+    transition: transform .3s;
+}
+
+.list .edit i:hover {
+    transform: rotate(12deg);
+}
+
 
 @media (min-width: 576px) {
     .list-row .col,
