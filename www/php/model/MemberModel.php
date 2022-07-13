@@ -3,7 +3,6 @@ require_once __DIR__ . '/../Database.php';
 
 class MemberModel extends Database
 {
-    // TODO sportarten müssen hier gemacht werden, dann kann hier auch sport rein!
     private const REQUIRED_FIELDS = ['forename', 'surname', 'zip', 'city', 'gender'];
     private const DEFAULT_AMOUNT_PER_PAGE = 15;
 
@@ -62,8 +61,6 @@ class MemberModel extends Database
         $plz = $data['zip'];
         $ort = $data['city'];
         $geschlecht = $data['gender'];
-
-        // TODO sportarten
 
         $stmt = 'UPDATE mitglied SET vorname = ?, nachname = ?, plz = ?, ort = ?, geschlecht = ? WHERE mi_id = ?';
 

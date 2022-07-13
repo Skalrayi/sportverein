@@ -24,7 +24,7 @@ include __DIR__ . "/../elements/navbar.php";
 
     <div class="action-bar mb-5">
         <button type="button" class="btn btn-default" data-bs-toggle="modal" data-bs-target="#addmember">+ Mitglied hinzufügen</button>
-        <?php if (isset($_GET['missingParameters'])) : //TODO html anpassen ?>
+        <?php if (isset($_GET['missingParameters'])) : ?>
             <p class="color-red">Fehlerhafte Eingaben!</p>
         <?php endif; ?>
         <form class="search" action="list.php" method="get">
@@ -79,12 +79,9 @@ include __DIR__ . "/../elements/navbar.php";
                     </form>
                 </div>
                 <div class="arrows">
-                    <?php // TODO paginagin auslagern und überarbeiten ?>
-                    <?php // TODO auslagern in den Controller und nur der View die Variablen übergeben, logik dafür noch bauen!!! ?>
                     <a href="./list.php?page=1"><i class="fa fa-long-arrow-left" aria-hidden="true"></i></a>
                     <a href="<?= isset($_GET['page']) ? ($_GET['page'] == 1 ? './list.php?page=1' : './list.php?page=' . $_GET['page'] - 1) : './list.php?page=1' ?>"><i class="fa fa-arrow-left" aria-hidden="true"></i></a>
                     <a href="<?= isset($_GET['page']) ? './list.php?page=' . $_GET['page'] + 1 : './list.php?page=2' ?>"><i class="fa fa-arrow-right" aria-hidden="true"></i></a>
-                    <?php //TODO amountPerPage muss gemacht werden!!!?>
                     <a href="<?= './list.php?page=' . $lastPage ?>"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
                 </div>
             </div>
