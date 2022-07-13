@@ -72,6 +72,7 @@ class CRUDController
         if (!AccessModel::isLoggedIn()) {
             die();
         }
+        // test
 
         $id = (int)$_POST['id'] ?? null;
         // Wenn keine ID da ist, dann kann auch nichts gemacht werden, also abbrechen
