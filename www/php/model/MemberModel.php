@@ -37,19 +37,24 @@ class MemberModel extends Database
         // sportarten aus dem Post Array
         $postSportarten = $data['sport'];
         var_dump($postSportarten);
+        var_dump($sportarten);
 
         // checken was nicht mehr vorhanden ist
         $sportartenRemoved = [];
+        $idsOfSportarten = [];
+
         foreach ($sportarten as $sportart) {
+            // mappen der ids für den unteren loop
+            $idsOfSportarten[] = $sportart['sa_id'];
             if (!in_array($sportart['sa_id'], $postSportarten)) {
                 $sportartenRemoved[] = $sportart;
             }
         }
 
-
+        // checken was neu dazu kommt
         $sportartenAdded = [];
         foreach ($postSportarten as $postSportart) {
-            if (!in_array($postSportart, $sportarten)) {
+            if (!in_array($postSportart, $idsOfSportarten)) {
                 $sportartenAdded[] = $postSportart;
             }
         }
@@ -96,6 +101,12 @@ class MemberModel extends Database
         return true;
     }
 
+    /**
+     * Fügt in die Beziehungstabelle memberid und sportartid ein
+     * @param int $memberId
+     * @param int $sportartId
+     * @return bool
+     */
     private function insertMemberSportart(int $memberId, int $sportartId): bool
     {
         $stmt = 'INSERT INTO mitglied_sportart (mi_id, sa_id) VALUES(?, ?)';
@@ -103,22 +114,23 @@ class MemberModel extends Database
         return true;
     }
 
-    public function getAllMembers(int $amount = null, int $page = null): array {
+    /**
+     * Gibt alle Member aus mit allen nötigen Informationen
+     *
+     * @param int|null $page
+     * @return array
+     */
+    public function getAllMembers(int $page = null): array {
         $stmt = 'SELECT m.*, GROUP_CONCAT(s.abteilung) as abteilung FROM mitglied m 
                 LEFT JOIN mitglied_sportart ms ON m.mi_id = ms.mi_id
                 LEFT JOIN sportart s ON ms.sa_id = s.sa_id
                 GROUP BY m.mi_id';
 
-        if (!$amount) {
-            $stmt .= ' LIMIT ' . self::DEFAULT_AMOUNT_PER_PAGE;
-        } else {
-            $stmt .= ' LIMIT ' . $amount;
-        }
+        // limit immer auf default amount
+        $stmt .= ' LIMIT ' . self::DEFAULT_AMOUNT_PER_PAGE;
 
-        // Berechnung für die Anzahl je nach Seite und eingegebenem Amount
-        if ($page && $amount) {
-            $stmt .= ' OFFSET ' . ($amount * $page);
-        } else if ($page) {
+        // Berechnung für die Anzahl je nach Seite
+        if ($page) {
             $stmt .= ' OFFSET ' . (($page - 1) * self::DEFAULT_AMOUNT_PER_PAGE);
         }
 

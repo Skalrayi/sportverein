@@ -102,8 +102,7 @@
                     <div class="row mb-3">
                         <div class="col-12 col-md-6">
                             <label for="zip" class="form-label">PLZ *</label>
-                            <input type="text" class="form-control maxlength=" 6"" id="zip" name="zip"
-                            value="<?= $zip ?>" required>
+                            <input type="text" class="form-control" maxlength="6" id="zip" name="zip" value="<?= $zip ?>" required>
                         </div>
                         <div class="col-12 col-md-6">
                             <label for="city" class="form-label">Ort *</label>

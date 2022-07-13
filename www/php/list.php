@@ -10,7 +10,7 @@ if ($accessController->isLoggedIn()) {
 
     // Variablen für die View vorbelegen
     $page = $_GET['page'] ?? null;
-    $userData = $memberModel->getAllMembers(null, $page) ?? [];
+    $userData = $memberModel->getAllMembers($page) ?? [];
     $countOfAllMembers = $memberModel->getCountOfAllMembers();
     $lastPage = Utility::calculateLastPage($countOfAllMembers, 15);
     $sportarten = $memberModel->getSportarten();
