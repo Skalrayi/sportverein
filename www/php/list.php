@@ -13,6 +13,7 @@ if ($accessController->isLoggedIn()) {
     $userData = $memberModel->getAllMembers(null, $page) ?? [];
     $countOfAllMembers = $memberModel->getCountOfAllMembers();
     $lastPage = Utility::calculateLastPage($countOfAllMembers, 15);
+    $sportarten = $memberModel->getSportarten();
 
     // wenn edit gesetzt ist, dann wird das Modal ausgefahren und braucht seine Variablen.
     if (isset($_GET['edit'])) {
@@ -23,6 +24,7 @@ if ($accessController->isLoggedIn()) {
         $city = $editMember['ort'];
         $gender = $editMember['geschlecht'];
         $id = $editMember['mi_id'];
+        $memberSportarten = $memberModel->getSportartenByMemberId((int)$id);
     }
 
     if (isset($_GET['search'])) {

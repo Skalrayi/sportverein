@@ -27,15 +27,14 @@ class CRUDController
         $city = trim($_POST['city']) ?? null;
         $gender = trim($_POST['gender']) ?? null;
         // nur m oder w ist erlaubt
-        if ($gender != 'm' || $gender != 'w') {
+        if ($gender != 'm' && $gender != 'w') {
             Utility::redirect('../list.php?gender=false');
         }
         $sportarten = $_POST['sport'] ?? null;
-        //TODO sportarten
 
         $memberModel = new MemberModel();
         // Wenn der Insert nicht geht, dann fehlt ein Post Parameter und somit redirect auf ?missingParameter
-        if (!$memberModel->insertNewUser([$forename, $surname, $zip, $city, $gender, 1, 1])) {
+        if (!$memberModel->insertNewUserWithSportarten([$forename, $surname, $zip, $city, $gender, 1, 1, 'sport' => $sportarten])) {
                Utility::redirect('../list.php?missingParameters=true');
         }
         // Wenn alles geklappt hat wieder auf die Seite weiterleiten, von der das Mitglied eingefügt wurde
@@ -90,13 +89,14 @@ class CRUDController
         $city = $_POST['city'] ?? null;
         $gender = $_POST['gender'] ?? null;
         // Nur m oder w ist erlaubt
-        if ($gender != 'm' || $gender != 'w') {
+        if ($gender != 'm' && $gender != 'w') {
             Utility::redirect('../list.php?gender=false');
         }
+        $sportarten = $_POST['sport'] ?? null;
 
         $memberModel = new MemberModel();
-        // TODO sportarten
-        $memberModel->updateMember($id, ['surname' => $surname, 'forename' => $forename, 'zip' => $zip, 'city' => $city, 'gender' => $gender]);
+
+        $memberModel->updateMember($id, ['surname' => $surname, 'forename' => $forename, 'zip' => $zip, 'city' => $city, 'gender' => $gender, 'sport' => $sportarten]);
         // zurück zur Liste
         Utility::redirect('../list.php');
     }

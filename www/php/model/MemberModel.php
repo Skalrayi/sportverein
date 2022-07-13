@@ -11,6 +11,14 @@ class MemberModel extends Database
         return $this->run('SELECT * FROM mitglied WHERE mi_id = ?', [$id])->fetch();
     }
 
+    public function getSportartenByMemberId(int $memberId): array {
+        $stmt = 'SELECT s.sa_id, s.abteilung 
+                FROM mitglied_sportart ms 
+                INNER JOIN sportart s
+                ON s.sa_id = ms.sa_id WHERE ms.mi_id = ?';
+        return $this->run($stmt, [$memberId])->fetchAll();
+    }
+
     /**
      * @param int $id
      * @param array $data
@@ -23,6 +31,31 @@ class MemberModel extends Database
                 return false;
             }
         }
+
+        // die sportarten, die man vor dem Edit hat
+        $sportarten = $this->getSportartenByMemberId($id);
+
+        // sportarten aus dem Post Array
+        $postSportarten = $data['sport'];
+        var_dump($postSportarten);
+
+        // checken was nicht mehr vorhanden ist
+        $sportartenRemoved = [];
+        foreach ($sportarten as $sportart) {
+            if (!in_array($sportart['sa_id'], $postSportarten)) {
+                $sportartenRemoved[] = $sportart;
+            }
+        }
+
+
+        $sportartenAdded = [];
+        foreach ($postSportarten as $postSportart) {
+            if (!in_array($postSportart, $sportarten)) {
+                $sportartenAdded[] = $postSportart;
+            }
+        }
+
+        var_dump($sportartenRemoved, $sportartenAdded);
 
         $vorname = $data['forename'];
         $nachname = $data['surname'];
@@ -44,18 +77,32 @@ class MemberModel extends Database
      * @param array $data
      * @return bool gibt wahr zurück, wenn ein User eingefügt wurde, ansonsten false
      */
-    public function insertNewUser(array $data): bool {
-        // Wenn bei den übergebenen Daten nicht alle benötigten Felder dabei sind, dann wird nichts inserted und false returned
-//        foreach (self::REQUIRED_FIELDS as $field) {
-//            if (!array_key_exists($field, $data)) {
-//                echo $field;
-//                return false;
-//            }
-//        }
+    public function insertNewUserWithSportarten(array $data): bool {
+        //sportarten aus dem datenarray holen
+        $sportarten = $data['sport'];
+        // dann für den insert des users, die Sportarten aus dem Datenarray raushauen
+        unset($data['sport']);
 
         $stmt = 'INSERT INTO mitglied (vorname, nachname, plz, ort, geschlecht, or_id, gb_id)
                  VALUES (?, ?, ?, ?, ?, ?, ?)';
+        // erst den neuen User inserten
         $this->run($stmt, $data);
+
+        // letzte Id raussuchen, die gerade insertet wurde, ist das neueste Mitglied
+        $lastInsertId = (int)$this->pdo->lastInsertId();
+
+        // für die Sportarten, jeweils einen beziehungseintrag
+        foreach ($sportarten as $sportart) {
+            $this->insertMemberSportart($lastInsertId, (int)$sportart);
+        }
+
+        return true;
+    }
+
+    private function insertMemberSportart(int $memberId, int $sportartId): bool
+    {
+        $stmt = 'INSERT INTO mitglied_sportart (mi_id, sa_id) VALUES(?, ?)';
+        $this->run($stmt, [$memberId, $sportartId]);
         return true;
     }
 
@@ -143,6 +190,12 @@ class MemberModel extends Database
             '%' . $searchParameter . '%',
             '%' . $searchParameter . '%'
         ])->fetchAll();
+    }
+
+    public function getSportarten(): array
+    {
+        $stmt = 'SELECT sa_id, abteilung FROM sportart';
+        return $this->run($stmt)->fetchAll();
     }
 
 }
