@@ -36,8 +36,6 @@ class MemberModel extends Database
 
         // sportarten aus dem Post Array
         $postSportarten = $data['sport'];
-        var_dump($postSportarten);
-        var_dump($sportarten);
 
         // checken was nicht mehr vorhanden ist
         $sportartenRemoved = [];
@@ -47,7 +45,7 @@ class MemberModel extends Database
             // mappen der ids für den unteren loop
             $idsOfSportarten[] = $sportart['sa_id'];
             if (!in_array($sportart['sa_id'], $postSportarten)) {
-                $sportartenRemoved[] = $sportart;
+                $sportartenRemoved[] = $sportart['sa_id'];
             }
         }
 
@@ -59,8 +57,7 @@ class MemberModel extends Database
             }
         }
 
-        var_dump($sportartenRemoved, $sportartenAdded);
-
+        // daten für die query vorbereiten
         $vorname = $data['forename'];
         $nachname = $data['surname'];
         $plz = $data['zip'];
@@ -70,7 +67,20 @@ class MemberModel extends Database
         $stmt = 'UPDATE mitglied SET vorname = ?, nachname = ?, plz = ?, ort = ?, geschlecht = ? WHERE mi_id = ?';
 
         $this->run($stmt, [$vorname, $nachname, $plz, $ort, $geschlecht, $id]);
+
+        foreach ($sportartenAdded as $sportartAdded) {
+            $this->insertMemberSportart($id, (int)$sportartAdded);
+        }
+
+        foreach ($sportartenRemoved as $sportartRemoved) {
+            $this->deleteSportartBySportartId((int)$sportartRemoved, $id);
+        }
         return true;
+    }
+
+    public function deleteSportartBySportartId(int $sportArtId, int $mitgliedId) {
+        $stmt = 'DELETE FROM mitglied_sportart WHERE sa_id = ? AND mi_id = ?';
+        $this->run($stmt, [$sportArtId, $mitgliedId]);
     }
 
     /**
@@ -144,7 +154,7 @@ class MemberModel extends Database
      * @return void
      */
     public function deleteMemberAndLinkedSportartByMemberId(int $id) {
-        $this->deleteLinkedSportartByMemberId($id);
+        $this->deleteAllLinkedSportartByMemberId($id);
         $this->deleteMemberById($id);
     }
 
@@ -161,7 +171,7 @@ class MemberModel extends Database
      * Löscht in der Beziehungstabelle die Verknüpfungen zwischen Sportart und Mitglied
      * @param int $id
      */
-    private function deleteLinkedSportartByMemberId(int $id) {
+    private function deleteAllLinkedSportartByMemberId(int $id) {
         $stmt = 'DELETE FROM mitglied_sportart WHERE mi_id = ?';
         $this->run($stmt, [$id]);
     }
@@ -186,14 +196,16 @@ class MemberModel extends Database
         $stmt = 'SELECT m.*, GROUP_CONCAT(s.abteilung) as abteilung FROM mitglied m 
                 LEFT JOIN mitglied_sportart ms ON m.mi_id = ms.mi_id
                 LEFT JOIN sportart s ON ms.sa_id = s.sa_id
-         WHERE vorname LIKE ? 
-           OR nachname LIKE ?
-           OR plz LIKE ?
-           OR ort LIKE ?
+         WHERE m.vorname LIKE ? 
+           OR m.nachname LIKE ?
+           OR m.plz LIKE ?
+           OR m.ort LIKE ?
+           OR s.abteilung LIKE ?
            GROUP BY m.mi_id';
 
         //überall wildcards
        return $this->run($stmt, [
+            '%' . $searchParameter . '%',
             '%' . $searchParameter . '%',
             '%' . $searchParameter . '%',
             '%' . $searchParameter . '%',
