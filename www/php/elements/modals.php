@@ -27,11 +27,11 @@
                 <div class="row mb-3">
                     <div class="col-12 col-md-6">
                         <label for="forename" class="form-label">Vorname *</label>
-                        <input type="text" class="form-control" id="forename" name="forename" required>
+                        <input type="text" class="form-control" maxlength="50" id="forename" name="forename" required>
                     </div>
                     <div class="col-12 col-md-6">
                         <label for="surname" class="form-label">Nachname *</label>
-                        <input type="text" class="form-control" id="surname" name="surname" required>
+                        <input type="text" class="form-control" maxlength="50" id="surname" name="surname" required>
                     </div>
                 </div>
                 <div class="row mb-3">
@@ -41,7 +41,7 @@
                     </div>
                     <div class="col-12 col-md-6">
                         <label for="city" class="form-label">Ort *</label>
-                        <input type="text" class="form-control" id="city" name="city" required>
+                        <input type="text" class="form-control" maxlength="50" id="city" name="city" required>
                     </div>
                 </div>
                 <div class="row mb-3">
@@ -90,12 +90,12 @@
                     <div class="row mb-3">
                         <div class="col-12 col-md-6">
                             <label for="forename" class="form-label">Vorname *</label>
-                            <input type="text" class="form-control" id="forename" name="forename"
+                            <input type="text" class="form-control" maxlength="50"  id="forename" name="forename"
                                    value="<?= $forename ?>" required>
                         </div>
                         <div class="col-12 col-md-6">
                             <label for="surname" class="form-label">Nachname *</label>
-                            <input type="text" class="form-control" id="surname" name="surname" value="<?= $surname ?>"
+                            <input type="text" class="form-control" maxlength="50" id="surname" name="surname" value="<?= $surname ?>"
                                    required>
                         </div>
                     </div>
@@ -106,7 +106,7 @@
                         </div>
                         <div class="col-12 col-md-6">
                             <label for="city" class="form-label">Ort *</label>
-                            <input type="text" class="form-control" id="city" name="city" value="<?= $city ?>" required>
+                            <input type="text" class="form-control" maxlength="50" id="city" name="city" value="<?= $city ?>" required>
                         </div>
                     </div>
                     <div class="row mb-3">
