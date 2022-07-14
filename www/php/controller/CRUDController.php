@@ -17,15 +17,15 @@ class CRUDController
         }
 
         // alle Variablen aus dem Request ziehen und schauen, ob sie da sind, ansonsten mit null belegen
-        $forename = trim($_POST['forename'] ?? '');
-        $surname = trim($_POST['surname'] ?? '');
+        $forename = htmlspecialchars(trim($_POST['forename'] ?? ''));
+        $surname = htmlspecialchars(trim($_POST['surname'] ?? ''));
         $zip = trim($_POST['zip'] ?? '');
         // redirecten wenn PLZ mehr als 6 ist, da die Datenbank nur 6 Zeichen erlaubt.
         if (strlen($zip) > 6) {
             Utility::redirect('../list.php?missingParameters=true');
         }
-        $city = trim($_POST['city'] ?? '');
-        $gender = trim($_POST['gender'] ?? '');
+        $city = htmlspecialchars(trim($_POST['city'] ?? ''));
+        $gender = htmlspecialchars(trim($_POST['gender'] ?? ''));
         // nur m oder w ist erlaubt
         if ($gender != 'm' && $gender != 'w') {
             Utility::redirect('../list.php?missingParameters=true');
@@ -84,15 +84,15 @@ class CRUDController
             die();
         }
 
-        $surname = trim($_POST['surname'] ?? '');
-        $forename = trim($_POST['forename'] ?? '');
-        $zip = trim($_POST['zip'] ?? '');
+        $surname = htmlspecialchars(trim($_POST['surname'] ?? ''));
+        $forename = htmlspecialchars(trim($_POST['forename'] ?? ''));
+        $zip = htmlspecialchars(trim($_POST['zip'] ?? ''));
         // Wenn irgendwie eine Postleitzahl größer 6 eingefügt wird, einfach redirecten, da es nicht erlaubt ist.
         if (strlen($zip) > 6) {
             Utility::redirect('../list.php?missingParameters=true');
         }
-        $city = trim($_POST['city'] ?? '');
-        $gender = trim($_POST['gender'] ?? '');
+        $city = htmlspecialchars(trim($_POST['city'] ?? ''));
+        $gender = htmlspecialchars(trim($_POST['gender'] ?? ''));
         // Nur m oder w ist erlaubt
         if ($gender != 'm' && $gender != 'w') {
             Utility::redirect('../list.php?missingParameters=true');
