@@ -54,8 +54,8 @@
                         </select>
                     </div>
                     <div class="col-12 col-md-6">
-                        <label for="sport" class="form-label">Sportarten *</label>
-                        <select type="text" class="form-select mb-4" id="sport" name="sport[]" required multiple>
+                        <label for="sport" class="form-label">Sportarten</label>
+                        <select type="text" class="form-select mb-4" id="sport" name="sport[]" multiple>
                             <option selected disabled value="">Sportart</option>
                             <?php foreach ($sportarten as $sportart) : ?>
                                 <option value="<?= $sportart['sa_id'] ?>"><?= $sportart['abteilung'] ?></option>
@@ -119,8 +119,8 @@
                             </select>
                         </div>
                         <div class="col-12 col-md-6">
-                            <label for="sport" class="form-label">Sportarten *</label>
-                            <select type="text" class="form-select mb-4" id="sport" name="sport[]" required multiple>
+                            <label for="sport" class="form-label">Sportarten</label>
+                            <select type="text" class="form-select mb-4" id="sport" name="sport[]" multiple>
                                 <option disabled selected>Sportart</option>
                                 <?php foreach ($sportarten as $sportart) : ?>
                                     <option <?= in_array($sportart, $memberSportarten) ? 'selected' : '' ?>

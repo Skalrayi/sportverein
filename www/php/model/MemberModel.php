@@ -35,7 +35,7 @@ class MemberModel extends Database
         $sportarten = $this->getSportartenByMemberId($id);
 
         // sportarten aus dem Post Array
-        $postSportarten = $data['sport'];
+        $postSportarten = $data['sport'] ?? [];
 
         // checken was nicht mehr vorhanden ist
         $sportartenRemoved = [];
@@ -91,7 +91,7 @@ class MemberModel extends Database
      */
     public function insertNewUserWithSportarten(array $data): bool {
         //sportarten aus dem datenarray holen
-        $sportarten = $data['sport'];
+        $sportarten = $data['sport'] ?? [];
         // dann für den insert des users, die Sportarten aus dem Datenarray raushauen
         unset($data['sport']);
 
